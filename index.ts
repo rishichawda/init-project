@@ -1,5 +1,12 @@
 #!/usr/bin/env node
 
-import * as prompt from "./lib/prompt";
+import * as inquirer from "inquirer";
+import errors from "./lib/errors";
+import process from "./lib/process";
+import { options } from "./lib/prompt";
 
-prompt.init();
+const init = () => {
+  inquirer.prompt(options).then(process).catch(errors);
+};
+
+init()

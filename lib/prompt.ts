@@ -1,32 +1,54 @@
-import * as inquirer from "inquirer";
-import prompt from "../resources/prompt.json";
+import chalk from "chalk";
+import { Answers, QuestionCollection } from "inquirer";
 
-interface InquirerError extends Error {
-  isTtyError: Boolean;
+export const options: QuestionCollection = [
+  {
+    type: "list",
+    name: "type",
+    message: "Specify the type of project.",
+    choices: ["frontend", "backend", "cli"],
+  },
+  {
+    type: "list",
+    name: "frontend",
+    message: "Specify the type of project.",
+    choices: ["react", "gatsby"],
+    when: (answers: Answers) => answers.type === "frontend",
+  },
+  {
+    type: "list",
+    name: "backend",
+    message: "Specify the type of project.",
+    choices: ["node"],
+    when: (answers: Answers) => answers.type === "backend",
+  },
+  {
+    type: "list",
+    name: "mw",
+    message: "Which middleware would you like to use for this project?",
+    choices: ["express", "koa"],
+    when: (answers: Answers) => answers.backend === "node",
+  },
+  {
+    type: "input",
+    name: "name",
+    message: "What should I name your project?",
+    validate: function (input) {
+      if (/^([A-Za-z\-\_\d])+$/.test(input)) return true;
+      else return 'Project name may only include letters, numbers, underscores and hashes.';
+    }
+  },
+];
+
+interface ColorsMap {
+  [x: string]: string;
 }
 
-const errors = (error: InquirerError) => {
-  if (error.isTtyError) {
-    // Prompt couldn't be rendered in the current environment
-    throw "Operation not supported!";
-  } else {
-    // Something else when wrong
-    throw error;
-  }
-};
+const COLORS_FOR_TYPE:ColorsMap = {
+  error: `bold.redBright`,
+  info: `yellowBright`,
+}
 
-export const init = () => {
-  inquirer
-    .prompt([prompt["project-type"]])
-    .then((project) => {
-      if (project["project-type"] === "frontend") {
-        inquirer
-          .prompt([prompt.choices.frontend])
-          .then((choice) => {
-            console.log({ choice });
-          })
-          .catch(errors);
-      }
-    })
-    .catch(errors);
-};
+export const format = (text: string, type: string) => {
+  return chalk`{${COLORS_FOR_TYPE[type]} ${text}}`
+}

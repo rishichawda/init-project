@@ -1,0 +1,5 @@
+{
+    "react": "https://github.com/rishichawda/minimal-react-boilerplate.git",
+    "node/express": "https://github.com/rishichawda/server-boilerplate.git",
+    "node/koa": "https://github.com/rishichawda/node-koa-boilerplate.git"
+}
