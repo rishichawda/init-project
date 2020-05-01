@@ -1,0 +1,16 @@
+{
+  "project-type": {
+    "type": "list",
+    "name": "project-type",
+    "message": "Specify the type of project.",
+    "choices": ["frontend", "backend", "cli"]
+  },
+  "choices": {
+    "frontend": {
+      "type": "list",
+      "name": "project-type",
+      "message": "Specify the type of project.",
+      "choices": ["react", "gatsby"]
+    }
+  }
+}
