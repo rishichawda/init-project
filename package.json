@@ -27,10 +27,11 @@
     "url": "git+https://github.com/rishichawda/initproject.git"
   },
   "author": "rishichawda",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/rishichawda/initproject/issues"
   },
   "homepage": "https://github.com/rishichawda/initproject#readme",
-  "description": ""
+  "description": "Initialize projects via command line interface.",
+  "keywords": ["boilerplate", "cli", "react", "node", "gatsby", "starters", "koa", "express"]
 }
