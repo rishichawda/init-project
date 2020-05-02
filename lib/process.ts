@@ -1,8 +1,7 @@
 import { spawn } from "child_process";
 import { Answers } from "inquirer";
-import ora from "ora";
+import Logger from "../utils/logger";
 
-import { format } from "./prompt";
 const gitUrls = require("../resources/git-url.json");
 
 export default (choice: Answers) => {
@@ -13,25 +12,27 @@ export default (choice: Answers) => {
   }
   const repoName = main.join("/");
   const repoUrl = gitUrls[repoName];
-  const spinner = ora("Processing..").start();
+  const logger = new Logger({});
   if (!repoUrl) {
-    spinner.fail(format("Couldn't find any boilerplate!", "error"));
+    logger.log("Couldn't find any boilerplate!", "error")
   } else {
-    spinner.info(format("Processing request", "info"));
+    logger.log("Processing request..")
     try {
-      const clone = spawn('git', ['clone', repoUrl, choice.name], {
+      const clone = spawn("git", ["clone", repoUrl, choice.name], {
         stdio: "inherit",
       });
       clone.on("error", (error: Error) => {
-        spinner.fail(format(error.message, "error"));
+        logger.log(error.message, "error")
       });
       clone.on("close", (code: number) => {
         if (!code) {
-          spinner.succeed(format("Successfully initialized boilerplate.", "info"));
+          logger.log("Successfully initialized boilerplate.", "success")
+        } else {
+          logger.log(`Error setting up boilerplate. Process exited with code: ${code}`, 'error')
         }
       });
     } catch (err) {
-      spinner.fail(format(err.message, "error"));
+      logger.log(err.message, "error")
     }
   }
 };

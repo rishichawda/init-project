@@ -1,4 +1,3 @@
-import chalk from "chalk";
 import { Answers, QuestionCollection } from "inquirer";
 
 export const options: QuestionCollection = [
@@ -35,20 +34,8 @@ export const options: QuestionCollection = [
     message: "What should I name your project?",
     validate: function (input) {
       if (/^([A-Za-z\-\_\d])+$/.test(input)) return true;
-      else return 'Project name may only include letters, numbers, underscores and hashes.';
-    }
+      else
+        return "Project name may only include letters, numbers, underscores and hashes.";
+    },
   },
 ];
-
-interface ColorsMap {
-  [x: string]: string;
-}
-
-const COLORS_FOR_TYPE:ColorsMap = {
-  error: `bold.redBright`,
-  info: `yellowBright`,
-}
-
-export const format = (text: string, type: string) => {
-  return chalk`{${COLORS_FOR_TYPE[type]} ${text}}`
-}

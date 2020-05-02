@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import * as inquirer from "inquirer";
-import errors from "./lib/errors";
+import errors from "./utils/errors";
 import process from "./lib/process";
 import { options } from "./lib/prompt";
 
