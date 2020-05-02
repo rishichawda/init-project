@@ -6,7 +6,7 @@
     "ts-node": "^8.9.1",
     "typescript": "^3.8.3"
   },
-  "name": "initproject",
+  "name": "init-project",
   "version": "0.0.1",
   "main": "dist/index.js",
   "bin": {
@@ -19,7 +19,7 @@
   },
   "scripts": {
     "start": "ts-node index.ts",
-    "build": "rm -rf dist | true && tsc -p .",
+    "build": "rm -rf dist | true && tsc -p . && cp -r resources dist/resources",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -33,5 +33,15 @@
   },
   "homepage": "https://github.com/rishichawda/initproject#readme",
   "description": "Initialize projects via command line interface.",
-  "keywords": ["boilerplate", "cli", "react", "node", "gatsby", "starters", "koa", "express"]
+  "keywords": [
+    "boilerplate",
+    "cli",
+    "react",
+    "node",
+    "gatsby",
+    "starters",
+    "koa",
+    "express"
+  ],
+  "files": ["dist"]
 }
