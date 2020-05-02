@@ -5,28 +5,38 @@ export const options: QuestionCollection = [
     type: "list",
     name: "type",
     message: "Specify the type of project.",
-    choices: ["frontend", "backend", "cli"],
+    choices: [
+      { name: "Client-side / Frontend", value: "client" },
+      { name: "Server-side / Backend", value: "server" },
+      { name: "Command Line Interface tool", value: "cli" },
+    ],
   },
   {
     type: "list",
-    name: "frontend",
+    name: "client",
     message: "Specify the type of project.",
-    choices: ["react", "gatsby"],
-    when: (answers: Answers) => answers.type === "frontend",
+    choices: [
+      { name: "React", value: "react" },
+      { name: "Gatsby", value: "gatsby" },
+    ],
+    when: (answers: Answers) => answers.type === "client",
   },
   {
     type: "list",
-    name: "backend",
+    name: "server",
     message: "Specify the type of project.",
-    choices: ["node"],
-    when: (answers: Answers) => answers.type === "backend",
+    choices: [{ name: "Node", value: "node" }],
+    when: (answers: Answers) => answers.type === "server",
   },
   {
     type: "list",
     name: "mw",
     message: "Which middleware would you like to use for this project?",
-    choices: ["express", "koa"],
-    when: (answers: Answers) => answers.backend === "node",
+    choices: [
+      { name: "Express", value: "express" },
+      { name: "Koa", value: "koa" },
+    ],
+    when: (answers: Answers) => answers.server === "node",
   },
   {
     type: "input",
@@ -37,5 +47,17 @@ export const options: QuestionCollection = [
       else
         return "Project name may only include letters, numbers, underscores and hashes.";
     },
+  },
+];
+
+export const setupOptions = [
+  {
+    type: "list",
+    name: "packager",
+    message: "Which package manager do you want to use?",
+    choices: [
+      { name: "NPM", value: "npm" },
+      { name: "Yarn", value: "yarn" },
+    ],
   },
 ];
